@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 17:31:33 by tbabou            #+#    #+#             */
-/*   Updated: 2024/06/19 16:17:05 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/07/21 20:09:28 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char	*get_next_line(int fd);
 
 // Other functions
 char	*ft_addchar(char *s1, char s2);
+void	ft_freesplit(char **split);
 
 // Colors
 

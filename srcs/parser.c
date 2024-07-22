@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:05:32 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/21 17:43:12 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/07/21 18:37:26 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	free_map(char **map)
 	{
 		while (map[i] != NULL)
 		{
-			ft_printf("Freeing line n %d - %s", i, map[i]);
 			free(map[i]);
 			i++;
 		}

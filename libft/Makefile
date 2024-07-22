@@ -16,7 +16,7 @@ PRINTF_FILES = ft_printf.c print_hexa.c print_nbr.c print_ptr.c \
 
 GNL_FILES = get_next_line.c get_next_line_utils.c \
 
-OTHER_FILES = ft_addchar.c
+OTHER_FILES = ft_addchar.c ft_freesplit.c
 
 LIBC = $(addprefix basic/, $(LIBC_FILES))
 ADDITIONAL = $(addprefix additional/, $(ADDITIONAL_FILES))
