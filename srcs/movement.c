@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:31:30 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/22 03:53:42 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:04:57 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	iso_movement(t_fdf *fdf, int direction)
 {
-	if (direction == LEFT)
+	if (direction == RIGHT)
 	{
 		fdf->x -= 10;
 		fdf->y += 10;
 	}
-	else if (direction == RIGHT)
+	else if (direction == LEFT)
 	{
 		fdf->x += 10;
 		fdf->y -= 10;
 	}
-	else if (direction == UP)
+	else if (direction == DOWN)
 	{
 		fdf->y -= 10;
 		fdf->x -= 10;
 	}
-	else if (direction == DOWN)
+	else if (direction == UP)
 	{
 		fdf->y += 10;
 		fdf->x += 10;
@@ -39,13 +39,13 @@ void	iso_movement(t_fdf *fdf, int direction)
 void	para_movement(t_fdf *fdf, int direction)
 {
 	if (direction == LEFT)
-		fdf->x -= 10;
-	else if (direction == RIGHT)
 		fdf->x += 10;
+	else if (direction == RIGHT)
+		fdf->x -= 10;
 	else if (direction == UP)
-		fdf->y -= 10;
-	else if (direction == DOWN)
 		fdf->y += 10;
+	else if (direction == DOWN)
+		fdf->y -= 10;
 }
 
 void	edit_start_value(t_fdf *fdf, int direction)
