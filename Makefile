@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =  fdf.c srcs/parser.c
+SRC =  fdf.c srcs/parser.c srcs/coords.c srcs/drawing.c srcs/movement.c \
+		srcs/utils.c srcs/line.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -19,16 +20,15 @@ BINARY_NAME = fdf
 COMPILER = cc
 
 MANDATORY_FLAGS = -Wall -Wextra -Werror
-MINILIBX_FLAGS = -lmlx -L./minilibx/ -lXext -lX11 -lm -lbsd
+MINILIBX_FLAGS = -L./minilibx/ -lmlx -lXext -lX11 -lm -lbsd
 LIBFT_FLAGS = -L./libft/ -lft
 
 all: $(BINARY_NAME)
-	$(COMPILER) $(MANDATORY_FLAGS) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) $(OBJ) -o $(BINARY_NAME)
 
 $(BINARY_NAME): $(OBJ)
-	# make -C libft/
-	# make -C minilibx/
-	$(COMPILER) $(MANDATORY_FLAGS) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) $(OBJ) -o $(BINARY_NAME)
+	make -C libft
+	make -C minilibx
+	$(COMPILER) $(MANDATORY_FLAGS) $(OBJ) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) -o $(BINARY_NAME)
 
 %.o: %.c
 	$(COMPILER) $(MANDATORY_FLAGS) -c $< -o $@
@@ -42,6 +42,4 @@ fclean: clean
 re: fclean all
 	@echo "🚀 done"
 
-
-
-.phony : all clean fclean re
+.PHONY: all clean fclean re

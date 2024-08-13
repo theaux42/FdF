@@ -6,36 +6,11 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:38:34 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/23 15:35:13 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/07/28 02:10:10 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-void	draw_horizontal(t_fdf *fdf, char **split, int y1);
-void	draw_vertical(t_fdf *fdf);
-
-void	draw_x_array(t_fdf *fdf, char **split, int y1)
-{
-	int	*coord;
-	int	j;
-	int	x1;
-	int	z1;
-
-	z1 = fdf->z + fdf->scale + BASE_SCALE;
-	j = 0;
-	x1 = 0;
-	while (split[j] != NULL)
-	{
-		coord = projection_handler(fdf, fdf->start_x + x1 + fdf->x, fdf->start_y
-				+ y1 + fdf->y, ft_atoi(split[j]) * z1);
-		mlx_pixel_put(fdf->mlx, fdf->win, coord[0], coord[1],
-			0x00FFFFFF);
-		free(coord);
-		x1 += BASE_SCALE + fdf->scale;
-		j++;
-	}
-}
 
 int	draw_point(t_fdf *fdf)
 {
@@ -49,92 +24,84 @@ int	draw_point(t_fdf *fdf)
 	{
 		y1 += BASE_SCALE + fdf->scale;
 		split = ft_split(fdf->map[i], ' ');
+		if (split == NULL)
+			malloc_exit(fdf);
 		draw_horizontal(fdf, split, y1);
-		draw_x_array(fdf, split, y1);
 		ft_freesplit(split);
+		split = NULL;
 		i++;
 	}
 	draw_vertical(fdf);
 	return (0);
 }
 
-void	redraw(t_fdf *fdf)
+void	draw_vertical_line(t_fdf *fdf, int horizontal, int x1, int z1)
 {
-	mlx_clear_window(fdf->mlx, fdf->win);
-	// draw_line_array(fdf, fdf->map[3]);
-	draw_point(fdf);
-}
+	int		vertical;
+	char	**split;
+	int		*coords1;
+	int		*coords2;
 
-int	*calculate_coords(t_fdf *fdf, int x, int y, char z)
-{
-	int	*coords;
-
-	coords = projection_handler(fdf, fdf->start_x + x + fdf->x + fdf->scale
-			+ BASE_SCALE, fdf->start_y + y + fdf->y + fdf->scale + BASE_SCALE, z * fdf->z
-			+ fdf->scale + BASE_SCALE);
-	return (coords);
+	vertical = 0;
+	while (vertical <= fdf->map_size[1] - 2)
+	{
+		split = ft_split(fdf->map[vertical], ' ');
+		if (split == NULL)
+			free_mlx(fdf);
+		coords1 = projection(fdf, get_x(fdf, x1), get_y(fdf, vertical, 1),
+				ft_atoi(split[horizontal]) * z1);
+		ft_freesplit(split);
+		split = ft_split(fdf->map[vertical + 1], ' ');
+		if (split == NULL)
+			free_mlx(fdf);
+		coords2 = projection(fdf, get_x(fdf, x1), get_y(fdf, vertical + 1, 1),
+				ft_atoi(split[horizontal]) * z1);
+		drawline(fdf, coords1, coords2);
+		ft_freesplit(split);
+		split = NULL;
+		vertical++;
+	}
 }
 
 void	draw_vertical(t_fdf *fdf)
 {
-	int		vertical;
-	int		horizontal;
-	char	**split;
-	int		*coords1;
-	int		*coords2;
-	int		x1;
-	int		z1;
-	int		weird;
+	int	horizontal;
+	int	x1;
+	int	z1;
 
-	weird = BASE_SCALE + fdf->scale;
 	x1 = 0;
-	z1 = fdf->z + fdf->scale + BASE_SCALE;
-	for (horizontal = 0; horizontal <= fdf->map_size[0]; horizontal++)
+	z1 = fdf->z + BASE_SCALE + fdf->scale;
+	horizontal = 0;
+	while (horizontal <= fdf->map_size[0])
 	{
-		vertical = 0;
-		while (vertical <= fdf->map_size[1] - 2)
-		{
-			split = ft_split(fdf->map[vertical], ' ');
-			coords1 = projection_handler(fdf, fdf->start_x + x1 + fdf->x,
-					fdf->start_y + vertical * (BASE_SCALE + fdf->scale) + weird
-					+ fdf->y, ft_atoi(split[horizontal]) * z1);
-			ft_freesplit(split);
-			split = ft_split(fdf->map[vertical + 1], ' ');
-			coords2 = projection_handler(fdf, fdf->start_x + x1 + fdf->x,
-					fdf->start_y + weird + (vertical + 1) * (BASE_SCALE + fdf->scale)
-					+ fdf->y, ft_atoi(split[horizontal]) * z1);
-			plotLine(fdf, coords1[0], coords1[1], coords2[0], coords2[1]);
-			ft_freesplit(split);
-			free(coords1);
-			free(coords2);
-			vertical++;
-		}
-		x1 += BASE_SCALE + fdf->scale;
+		draw_vertical_line(fdf, horizontal, x1, z1);
+		horizontal++;
+		x1++;
 	}
+}
+
+void	redraw(t_fdf *fdf)
+{
+	mlx_clear_window(fdf->mlx, fdf->win);
+	draw_point(fdf);
 }
 
 void	draw_horizontal(t_fdf *fdf, char **split, int y1)
 {
-	int	i;
-	int	x1;
 	int	*coords1;
 	int	*coords2;
+	int	i;
 	int	z1;
 
-	z1 = fdf->z + fdf->scale + BASE_SCALE;
+	z1 = fdf->z + BASE_SCALE + fdf->scale;
 	i = 0;
-	x1 = 0;
 	while (split[i + 1] != NULL)
 	{
-		coords1 = projection_handler(fdf, fdf->start_x + x1 + fdf->x,
-				fdf->start_y + y1 + fdf->y, ft_atoi(split[i]) * z1);
-		coords2 = projection_handler(fdf, fdf->start_x + x1 + fdf->x + BASE_SCALE
-				+ fdf->scale, fdf->start_y + y1 + fdf->y, ft_atoi(split[i + 1])
-				* z1);
-		plotLine(fdf, coords1[0], coords1[1], coords2[0], coords2[1]);
-		free(coords1);
-		free(coords2);
-		x1 += BASE_SCALE + fdf->scale;
+		coords1 = projection(fdf, get_x(fdf, i), get_y(fdf, y1, 0),
+				ft_atoi(split[i]) * z1);
+		coords2 = projection(fdf, get_x(fdf, i + 1), get_y(fdf, y1, 0),
+				ft_atoi(split[i + 1]) * z1);
+		drawline(fdf, coords1, coords2);
 		i++;
 	}
 }

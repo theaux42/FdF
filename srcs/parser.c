@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:05:32 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/23 15:11:31 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:13:48 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int	*map_checker(char **map)
 	while (map[y] != NULL)
 	{
 		current_line = get_arr_length(map[y]);
-		if (current_line != first_line
-			&& current_line != 0)
+		if (current_line != first_line)
 			return (NULL);
 		y++;
 	}
