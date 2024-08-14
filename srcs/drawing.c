@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:38:34 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/28 02:10:10 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:41:54 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	draw_vertical_line(t_fdf *fdf, int horizontal, int x1, int z1)
 		split = ft_split(fdf->map[vertical], ' ');
 		if (split == NULL)
 			free_mlx(fdf);
-		coords1 = projection(fdf, get_x(fdf, x1), get_y(fdf, vertical, 1),
+		coords1 = projection(get_x(fdf, x1), get_y(fdf, vertical, 1),
 				ft_atoi(split[horizontal]) * z1);
 		ft_freesplit(split);
 		split = ft_split(fdf->map[vertical + 1], ' ');
 		if (split == NULL)
 			free_mlx(fdf);
-		coords2 = projection(fdf, get_x(fdf, x1), get_y(fdf, vertical + 1, 1),
+		coords2 = projection(get_x(fdf, x1), get_y(fdf, vertical + 1, 1),
 				ft_atoi(split[horizontal]) * z1);
 		drawline(fdf, coords1, coords2);
 		ft_freesplit(split);
@@ -97,9 +97,9 @@ void	draw_horizontal(t_fdf *fdf, char **split, int y1)
 	i = 0;
 	while (split[i + 1] != NULL)
 	{
-		coords1 = projection(fdf, get_x(fdf, i), get_y(fdf, y1, 0),
-				ft_atoi(split[i]) * z1);
-		coords2 = projection(fdf, get_x(fdf, i + 1), get_y(fdf, y1, 0),
+		coords1 = projection(get_x(fdf, i), get_y(fdf, y1, 0), ft_atoi(split[i])
+				* z1);
+		coords2 = projection(get_x(fdf, i + 1), get_y(fdf, y1, 0),
 				ft_atoi(split[i + 1]) * z1);
 		drawline(fdf, coords1, coords2);
 		i++;

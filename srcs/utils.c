@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:57:08 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/28 02:10:34 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:43:50 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	free_mlx(t_fdf *fdf)
 
 void	set_values(t_fdf *fdf)
 {
+	fdf->map = NULL;
+	fdf->map_size = NULL;
 	fdf->win_width = 1200;
 	fdf->win_height = 800;
 	fdf->x = 0;
 	fdf->y = 0;
 	fdf->z = 0;
-	fdf->is_iso = 1;
 	fdf->start_x = 660;
 	fdf->start_y = 0;
 	fdf->scale = 0;
@@ -49,14 +50,6 @@ void	init_everything(char *map, t_fdf *fdf)
 		ft_printf("%s[ERROR] The map in invalid.\n%s", RED, RESET);
 		free_mlx(fdf);
 	}
-}
-
-void	choose_movement(t_fdf *fdf, int direction)
-{
-	if (fdf->is_iso)
-		iso_movement(fdf, direction);
-	else
-		para_movement(fdf, direction);
 }
 
 void	malloc_exit(t_fdf *fdf)

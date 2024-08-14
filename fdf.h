@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:43 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/28 02:14:37 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/14 17:04:58 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_fdf
 	int		*map_size;
 	int		win_width;
 	int		win_height;
-	int		is_iso;
 	int		scale;
 	int		start_x;
 	int		start_y;
@@ -73,7 +72,7 @@ typedef struct s_line
 
 int			get_arr_length(char *line);
 int			draw_point(t_fdf *fdf);
-int			*projection(t_fdf *fdf, int x, int y, int z);
+int			*projection(int x, int y, int z);
 char		**init_parsing(char *file_name);
 void		init_everything(char *map, t_fdf *fdf);
 void		free_map(char **map);
@@ -90,11 +89,8 @@ void		draw_horizontal(t_fdf *fdf, char **split, int y1);
 
 // MOVEMENT FUNCTIONS
 void		iso_movement(t_fdf *fdf, int direction);
-void		para_movement(t_fdf *fdf, int direction);
 void		zoom_handler(t_fdf *fdf, int direction);
-void		switch_projection(t_fdf *fdf);
 void		change_z_value(t_fdf *fdf, int key);
-void		choose_movement(t_fdf *fdf, int direction);
 
 void		malloc_exit(t_fdf *fdf);
 

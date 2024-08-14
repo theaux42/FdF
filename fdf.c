@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:25 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/28 02:11:37 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:45:11 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	on_key_press(int key, t_fdf *fdf)
 	if (key == ESC)
 		free_mlx(fdf);
 	else if (key == LEFT || key == RIGHT || key == UP || key == DOWN)
-		choose_movement(fdf, key);
+		iso_movement(fdf, key);
 	else if (key == ZOOM || key == DEZOOM)
 		zoom_handler(fdf, key);
 	else if (key == PAGE_UP || key == PAGE_DOWN)

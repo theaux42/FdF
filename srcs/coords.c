@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:21:59 by tbabou            #+#    #+#             */
-/*   Updated: 2024/07/25 17:41:54 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:42:27 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,12 @@ int	get_y(t_fdf *fdf, int y, int scale)
 		return (fdf->start_y + y + fdf->y);
 }
 
-int	*projection(t_fdf *fdf, int x, int y, int z)
+int	*projection(int x, int y, int z)
 {
 	int	*coord;
 
 	coord = malloc(sizeof(int) * 2);
-	if (fdf->is_iso)
-	{
-		coord[0] = (x - y) * cos(0.523599);
-		coord[1] = -z + (x + y) * sin(0.523599);
-	}
-	else
-	{
-		coord[0] = x;
-		coord[1] = y;
-	}
+	coord[0] = (x - y) * cos(0.523599);
+	coord[1] = -z + (x + y) * sin(0.523599);
 	return (coord);
 }
