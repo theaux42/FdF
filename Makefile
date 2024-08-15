@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theaux <theaux@student.42.fr>              +#+  +:+       +#+         #
+#    By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/20 16:03:21 by tbabou            #+#    #+#              #
-#    Updated: 2024/08/15 17:01:33 by theaux           ###   ########.fr        #
+#    Updated: 2024/08/15 23:52:38 by tbabou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,14 @@ clean:
 fclean: clean
 	rm -f $(BINARY_NAME)
 
+ffclean: fclean
+	make -C libft fclean
+	make -C minilibx clean
+	
 re: fclean all
 	@echo "🚀 done"
 
-.PHONY: all clean fclean re
+fre: ffclean all
+	@echo "🚀 done"
+
+.PHONY: all clean fclean ffclean re fre
