@@ -70,12 +70,12 @@ int	get_final_size(char *s1, char *s2, char *buffer)
 	return (size);
 }
 
-char	*get_line(int fd)
+char	*get_line(int fd, int amount)
 {
 	static char	buffer[FD_SIZE][BUFFER_SIZE + 1];
 	char		*line;
+	char		*tmp;
 	char		*new_line;
-	int			amount;
 	int			final_size;
 
 	line = ft_strdup(buffer[fd]);
@@ -84,7 +84,9 @@ char	*get_line(int fd)
 	{
 		amount = read(fd, buffer[fd], BUFFER_SIZE);
 		buffer[fd][amount] = '\0';
+		tmp = line;
 		line = ft_strjoin(line, buffer[fd]);
+		free(tmp);
 	}
 	if (!ft_strlen(line))
 		return (free(line), NULL);
@@ -97,10 +99,12 @@ char	*get_line(int fd)
 char	*get_next_line(int fd)
 {
 	char	*line;
+	int		amount;
 
+	amount = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	line = get_line(fd);
+	line = get_line(fd, amount);
 	if (!line || line[0] == '\0')
 		return (NULL);
 	return (line);
