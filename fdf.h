@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theaux <theaux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:43 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/15 18:46:13 by theaux           ###   ########.fr       */
+/*   Updated: 2024/08/16 00:52:57 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define S 115
 # define D 100
 
-# define BASE_SCALE 15
+# define BASE_SCALE 30
 
 typedef struct s_fdf
 {

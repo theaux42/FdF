@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:57:08 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/15 23:46:39 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 00:55:57 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_values(t_fdf *fdf)
 	fdf->z = 0;
 	fdf->map_height = 0;
 	fdf->start_x = 660;
-	fdf->start_y = 0;
+	fdf->start_y = 40;
 	fdf->scale = 0;
 }
 
