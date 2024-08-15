@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+         #
+#    By: theaux <theaux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/20 16:03:21 by tbabou            #+#    #+#              #
-#    Updated: 2024/07/20 23:58:15 by tbabou           ###   ########.fr        #
+#    Updated: 2024/08/15 17:01:33 by theaux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BINARY_NAME = fdf
 
 COMPILER = cc
 
-MANDATORY_FLAGS = -Wall -Wextra -Werror
+MANDATORY_FLAGS = -Wall -Wextra -Werror -g3
 MINILIBX_FLAGS = -L./minilibx/ -lmlx -lXext -lX11 -lm -lbsd
 LIBFT_FLAGS = -L./libft/ -lft
 

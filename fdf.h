@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: theaux <theaux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:43 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/14 17:04:58 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/15 18:46:13 by theaux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_fdf
 	int		scale;
 	int		start_x;
 	int		start_y;
+	int		map_height;
 	int		x;
 	int		y;
 	int		z;
@@ -73,12 +74,12 @@ typedef struct s_line
 int			get_arr_length(char *line);
 int			draw_point(t_fdf *fdf);
 int			*projection(int x, int y, int z);
-char		**init_parsing(char *file_name);
+char		**init_parsing(t_fdf *fdf, char *file_name);
 void		init_everything(char *map, t_fdf *fdf);
 void		free_map(char **map);
 void		free_mlx(t_fdf *fdf);
 void		redraw(t_fdf *fdf);
-int			*map_checker(char **map);
+int			*map_checker(t_fdf *fdf, char **map);
 // IN TESTING
 int			get_x(t_fdf *fdf, int x);
 int			get_y(t_fdf *fdf, int y, int scale);

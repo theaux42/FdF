@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:25 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/14 16:45:11 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/15 23:46:18 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	on_key_press(int key, t_fdf *fdf)
 
 int	free_mlx_wrapper(void *param)
 {
-    free_mlx((t_fdf *)param);
-    return (0);
+	free_mlx((t_fdf *)param);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_printf("Usage: %s <map>\n", av[0]), 1);
 	init_everything(av[1], &fdf);
-    mlx_hook(fdf.win, 17, 1L << 17, free_mlx_wrapper, &fdf);
+	mlx_hook(fdf.win, 17, 1L << 17, free_mlx_wrapper, &fdf);
 	mlx_key_hook(fdf.win, on_key_press, &fdf);
 	redraw(&fdf);
 	mlx_loop(fdf.mlx);

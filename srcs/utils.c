@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:57:08 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/14 16:43:50 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/15 23:46:39 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	set_values(t_fdf *fdf)
 	fdf->x = 0;
 	fdf->y = 0;
 	fdf->z = 0;
+	fdf->map_height = 0;
 	fdf->start_x = 660;
 	fdf->start_y = 0;
 	fdf->scale = 0;
@@ -41,14 +42,28 @@ void	set_values(t_fdf *fdf)
 void	init_everything(char *map, t_fdf *fdf)
 {
 	set_values(fdf);
-	fdf->map = init_parsing(map);
-	fdf->map_size = map_checker(fdf->map);
+	fdf->map = init_parsing(fdf, map);
+	if (!fdf->map)
+	{
+		ft_printf("%s[ERROR] The map is invalid.\n%s", RED, RESET);
+		malloc_exit(fdf);
+		return ;
+	}
+	fdf->map_size = map_checker(fdf, fdf->map);
+	if (!fdf->map_size)
+	{
+		ft_printf("%s[ERROR] The map size is invalid.\n%s", RED, RESET);
+		free_map(fdf->map);
+		malloc_exit(fdf);
+		return ;
+	}
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, fdf->win_width, fdf->win_height, "fdf");
-	if (fdf->map == NULL || fdf->map_size == NULL)
+	if (!fdf->mlx || !fdf->win)
 	{
-		ft_printf("%s[ERROR] The map in invalid.\n%s", RED, RESET);
+		ft_printf("%s[ERROR] Failed to initialize mlx.\n%s", RED, RESET);
 		free_mlx(fdf);
+		return ;
 	}
 }
 
