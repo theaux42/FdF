@@ -33,7 +33,7 @@ LIB = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I ./
+CFLAGS = -Wall -Werror -Wextra -I ./ -g3
 
 .c.o:
 	@printf "\033[K Compiling $<... \r"

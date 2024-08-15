@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbabou <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: theaux <theaux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:39:18 by tbabou            #+#    #+#             */
-/*   Updated: 2023/12/14 16:37:18 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/15 17:05:08 by theaux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static size_t	ft_wordcount(char const *str, char characters)
 	size_t	count;
 	size_t	i;
 
+	if (!str)
+		return (0);
 	count = 0;
 	i = 0;
 	while (str[i])
@@ -76,7 +78,7 @@ char	**ft_split(char const *str, char characters)
 	char	**array;
 	size_t	words;
 
-	if (!str)
+	if (!str || *str == '\0')
 		return (NULL);
 	words = ft_wordcount(str, characters);
 	array = (char **)malloc(sizeof(char *) * (words + 1));

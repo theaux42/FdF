@@ -74,7 +74,6 @@ char	*get_line(int fd)
 {
 	static char	buffer[FD_SIZE][BUFFER_SIZE + 1];
 	char		*line;
-	char		*temp;
 	char		*new_line;
 	int			amount;
 	int			final_size;
@@ -85,9 +84,7 @@ char	*get_line(int fd)
 	{
 		amount = read(fd, buffer[fd], BUFFER_SIZE);
 		buffer[fd][amount] = '\0';
-		temp = line;
 		line = ft_strjoin(line, buffer[fd]);
-		free(temp);
 	}
 	if (!ft_strlen(line))
 		return (free(line), NULL);
