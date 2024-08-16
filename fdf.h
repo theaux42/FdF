@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:02:43 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/16 11:38:57 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 12:12:14 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_line
 
 int			get_arr_length(char *line);
 int			draw_point(t_fdf *fdf);
-int			*projection(int x, int y, int z);
+int			*projection(t_fdf *fdf, int x, int y, int z);
 char		**init_parsing(t_fdf *fdf, char *file_name);
 void		init_everything(char *map, t_fdf *fdf);
 void		free_map(char **map);

@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:05:32 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/16 11:40:03 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 12:11:19 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ char	**init_parsing(t_fdf *fdf, char *file_name)
 	parsed_map = NULL;
 	i = 0;
 	fd = open(file_name, O_RDONLY);
+	parsed_map = malloc(sizeof(char *) * (get_map_height(file_name)));
+	if (!parsed_map)
+		return (NULL);
 	line = get_next_line(fd);
 	while (line != NULL && line[0] != '\0' && line[0] != '\n')
 	{
-		if (i == 0)
-			parsed_map = malloc(sizeof(char *) * (get_map_height(file_name)));
 		parsed_map[i] = ft_strdup(line);
 		free(line);
 		line = get_next_line(fd);
@@ -89,6 +90,8 @@ int	*map_checker(t_fdf *fdf, char **map)
 	if (!map)
 		return (NULL);
 	map_size = malloc(sizeof(int) * 2);
+	if (!map_size)
+		return (NULL);
 	current_line = 0;
 	first_line = get_arr_length(map[0]);
 	y = 1;

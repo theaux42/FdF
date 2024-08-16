@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:57:08 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/16 11:39:27 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 12:06:14 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void	free_mlx(t_fdf *fdf)
 {
-	mlx_destroy_window(fdf->mlx, fdf->win);
-	mlx_destroy_display(fdf->mlx);
-	free(fdf->mlx);
+	if (fdf->mlx != NULL && fdf->win != NULL)
+		mlx_destroy_window(fdf->mlx, fdf->win);
+	if (fdf->mlx != NULL)
+	{
+		mlx_destroy_display(fdf->mlx);
+		free(fdf->mlx);
+	}
 	if (fdf->map != NULL)
 		free_map(fdf->map);
 	if (fdf->map_size != NULL)
@@ -28,6 +32,8 @@ void	set_values(t_fdf *fdf)
 {
 	fdf->map = NULL;
 	fdf->map_size = NULL;
+	fdf->mlx = NULL;
+	fdf->win = NULL;
 	fdf->win_width = 1200;
 	fdf->win_height = 800;
 	fdf->x = 0;
@@ -44,19 +50,16 @@ void	init_everything(char *map, t_fdf *fdf)
 	set_values(fdf);
 	fdf->map = init_parsing(fdf, map);
 	if (!fdf->map)
+		malloc_exit(fdf);
+	fdf->map_size = map_checker(fdf, fdf->map);
+	if (fdf->map_size[0] == 0 || fdf->map_size[1] == 0)
 	{
 		ft_printf("%s[ERROR] The map is invalid.\n%s", RED, RESET);
-		malloc_exit(fdf);
+		free_mlx(fdf);
 		return ;
 	}
-	fdf->map_size = map_checker(fdf, fdf->map);
 	if (!fdf->map_size)
-	{
-		ft_printf("%s[ERROR] The map size is invalid.\n%s", RED, RESET);
-		free_map(fdf->map);
 		malloc_exit(fdf);
-		return ;
-	}
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, fdf->win_width, fdf->win_height, "fdf");
 	if (!fdf->mlx || !fdf->win)
