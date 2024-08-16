@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:05:32 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/15 23:27:55 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 11:40:03 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ int	get_arr_length(char *line)
 	return (j - 1);
 }
 
+int	get_map_height(char *file_name)
+{
+	int		map_height;
+	int		fd;
+	char	*line;
+
+	map_height = 0;
+	fd = open(file_name, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL && line[0] != '\0' && line[0] != '\n')
+	{
+		map_height++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+	return (map_height + 1);
+}
+
 char	**init_parsing(t_fdf *fdf, char *file_name)
 {
 	char	**parsed_map;
@@ -46,7 +66,7 @@ char	**init_parsing(t_fdf *fdf, char *file_name)
 	while (line != NULL && line[0] != '\0' && line[0] != '\n')
 	{
 		if (i == 0)
-			parsed_map = malloc(sizeof(char *) * (get_arr_length(line) + 2));
+			parsed_map = malloc(sizeof(char *) * (get_map_height(file_name)));
 		parsed_map[i] = ft_strdup(line);
 		free(line);
 		line = get_next_line(fd);
@@ -70,8 +90,8 @@ int	*map_checker(t_fdf *fdf, char **map)
 		return (NULL);
 	map_size = malloc(sizeof(int) * 2);
 	current_line = 0;
-	y = 0;
-	first_line = get_arr_length(map[y]);
+	first_line = get_arr_length(map[0]);
+	y = 1;
 	while (y < fdf->map_height)
 	{
 		if (map[y] == NULL || *map[y] == '\0')
