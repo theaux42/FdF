@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:52:26 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/16 16:23:23 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/16 17:33:26 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_everything(char *map, t_fdf *fdf)
 	if (!fdf->map)
 		malloc_exit(fdf);
 	fdf->map_size = map_checker(fdf, fdf->map);
-	if (fdf->map_size[0] == 0 || fdf->map_size[1] == 0)
+	if (!fdf->map_size || fdf->map_size[0] == 0 || fdf->map_size[1] == 0)
 	{
 		ft_printf("%s[ERROR] The map is invalid.\n%s", RED, RESET);
 		free_mlx(fdf);
