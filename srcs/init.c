@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:52:26 by tbabou            #+#    #+#             */
-/*   Updated: 2024/08/16 17:33:26 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/08/17 14:57:03 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ void	init_mlx(t_fdf *fdf)
 
 void	init_everything(char *map, t_fdf *fdf)
 {
+	int		fd;
+
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("%s[ERROR] The file %s does not exist.\n%s", RED, map, RESET);
+		free_mlx(fdf);
+	}
+	close(fd);
 	fdf->map = init_parsing(fdf, map);
 	if (!fdf->map)
 		malloc_exit(fdf);
